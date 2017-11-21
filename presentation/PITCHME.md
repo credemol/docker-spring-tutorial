@@ -15,11 +15,25 @@ SpringBoot Application on Docker
 ## Pre requisites
 
 * JDK 1.8: [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* Maven 3.5 or higher: [https://maven.apache.org/download.cgi](https://maven.apache.org/download.cgi)
+* Maven 3.5: [https://maven.apache.org/download.cgi](https://maven.apache.org/download.cgi)
 * Spring Tool Suite: [https://spring.io/tools/sts](https://spring.io/tools/sts)
-* Docker or Docker Toolbox
 
-> Run Spring Tool Suite
+* set environment variables: 
+  * JAVA_HOME: specify the location where java has been installed
+  * MAVEN_HOME: specify the location where you unzipped the maven.zip file
+  * PATH: $JAVA_HOME/bin:$M2_HOME/bin:
+   
+> Run Spring Tool Suite and see where the workspace is
+
+---
+### verify if JAVA and MAVEN have been installed properly
+
+```sh
+$ java -version
+$ mvn -v
+$ echo $PATH  
+```
+
 ---
 ## Create a Spring Boot Project
 
@@ -47,6 +61,14 @@ Package       | ocap.tutorial.dockerspring
 * SQL > JPA
 * SQL > MySQL
 * Web > Web
+
+---
+### Compile your project with Maven
+
+1. Open a terminal window
+1. Change directory to docker-spring-tutorial under Workspace Directory
+1. run _mvn compile_. It takes a while to download required library from the Internet.
+
 
 ---
 <!-- .slide: class="center" -->
