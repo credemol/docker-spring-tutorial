@@ -6,5 +6,5 @@ theme : black
 #transition : none
 published : false
 transition : fade
-footnote : "Oracle Monthly Meetup. 2017-11-18"
+footnote : "Spring Boot Application on Docker"
 

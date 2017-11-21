@@ -10,7 +10,7 @@ SpringBoot Application on Docker
 <!-- .slide: class="center" -->
 * PT: [https://gitpitch.com/credemol/docker-spring-tutorial?p=presentation#/](https://gitpitch.com/credemol/docker-spring-tutorial?p=presentation#/)
 
-* Slack: cloudnativeapp.slack.com
+* Slack: [https://cloudnativeapp.slack.com](https://cloudnativeapp.slack.com)
 
 ---
 ## Pre requisites
@@ -209,7 +209,8 @@ Name          | User
 
 
 --- 
-### User.java
+### Entity
+File ocap/tutorial/dockerspring/entity/User.java
 
 ```java
 package ocap.tutorial.dockerspring.entity;
@@ -265,7 +266,8 @@ Name          | UserRepository
 
 
 ---
-### UserRepository.java
+### Repository
+File: ocap/tutorial/dockerspring/repo/UserRepository.java
 ```java
 package ocap.tutorial.dockerspring.repo;
 
@@ -280,7 +282,8 @@ public interface UserRepository extends CrudRepository<User, Long>{
 ```
 
 ---
-### add JPA Properties to application.properties
+### add JPA Properties
+File: src/main/resources/application.properties
 ```properties
 spring.datasource.url = jdbc:mysql://localhost:3306/springdb?useSSL=false
 
@@ -358,11 +361,110 @@ insert into springdb.user (username, email, password) values ('ko', 'ko@gmail.co
 
 ---?image=https://user-images.githubusercontent.com/5771924/33070398-37af6244-cefb-11e7-8cc1-10911ecee524.png&size=auto 90%
 
+---
 ### Delete User through Postman
 * **HTTP Method**: DELETE
 * **URL**: localhost:8080/users/4
 
 ---?image=https://user-images.githubusercontent.com/5771924/33070524-9d2c3e44-cefb-11e7-80ad-367d96b80a01.png&size=auto 90%
+
+---
+### HTTP Method vs SQL
+HTTP Method | SQL Statement | Note
+------------|---------------|-----------------
+ GET        | SELECT        | List, One Item
+ POST       | CREATE        |
+ PUT        | UPDATE        |
+ DELETE     | DELETE        |
+
+
+### Sophisticated Query using findBy
+File: ocap/tutorial/dockerspring/repo/UserRepository.java
+```java
+package ocap.tutorial.dockerspring.repo;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+import ocap.tutorial.dockerspring.entity.User;
+
+@RepositoryRestResource
+public interface UserRepository extends CrudRepository<User, Long>{
+	User findByUsername(@Param("username") String username);
+	User findByEmail(@Param("email") String email);
+	
+	List<User> findByEmailLike(@Param("email")String email);
+	List<User> findByEmailStartingWith(@Param("email")String email);
+	List<User> findByEmailEndingWith(@Param("email")String email);
+	List<User> findByEmailContaining(@Param("email")String email);
+	
+	List<User> findByUsernameAndEmail(@Param("username")String username, @Param("email")String email);
+	List<User> findByUsernameOrEmail(@Param("username")String username, @Param("email")String email);
+}
+
+@[3-9](import required classes)
+@[13-22](select query) 
+````
+---
+### Test Query
+
+* [http://localhost:8080/users/search/findByUsername?username=kim](http://localhost:8080/users/search/findByUsername?username=kim)
+* [http://localhost:8080/users/search/findByEmail?email=kim@gmail.com](http://localhost:8080/users/search/findByEmail?email=kim@gmail.com)
+* [http://localhost:8080/users/search/findByEmailStartingWith?email=k](http://localhost:8080/users/search/findByEmailStartingWith?email=k)
+* [http://localhost:8080/users/search/findByEmailEndingWith?email=com](http://localhost:8080/users/search/findByEmailEndingWith?email=com)
+* [http://localhost:8080/users/search/findByEmailContaining?email=gmail](http://localhost:8080/users/search/findByEmailContaining?email=gmail)
+* [http://localhost:8080/users/search/findByEmailLike?email=%25gmail%25](http://localhost:8080/users/search/findByEmailLike?email=%25gmail%25)
+* [http://localhost:8080/users/search/findByUsernameAndEmail?username=kim&email=kim@gmail.com](http://localhost:8080/users/search/findByUsernameAndEmail?username=kim&email=kim@gmail.com)
+* [http://localhost:8080/users/search/findByUsernameOrEmail?username=kim&email=kim@gmail.com](http://localhost:8080/users/search/findByUsernameOrEmail?username=kim&email=kim@gmail.com)
+
+---
+### Containerizing
+
+File: src/main/resources/application.properties
+```properties
+spring.datasource.url = jdbc:mysql://${SPRING_DB:localhost}:3306/springdb?useSSL=false
+
+# Username and password
+spring.datasource.username = springdb
+spring.datasource.password = springdb
+
+#JPA properties
+spring.jpa.show-sql = true
+spring.jpa.hibernate.ddl-auto = update
+```
+@[1](change database url)
+
+---
+#### Dockerfile
+File: docker/Dockerfile-spring
+```sh
+$ mvn clean package
+$ cd docker
+$ rm docker-spring-tutorial-0.0.1-SNAPSHOT.jar
+$ cp -f ../target/docker-spring-tutorial-0.0.1-SNAPSHOT.jar  ./
+$ vi Dockerfile-spring
+```
+
+```dockerfile
+FROM openjdk:8-jdk-alpine
+RUN mkdir -p /usr/src/app
+COPY docker-spring-tutorial-0.0.1-SNAPSHOT.jar /usr/src/app/
+CMD java -jar /usr/src/app/docker-spring-tutorial-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+```
+
+---
+#### Build & Run Spring Application
+```sh
+$ 
+$ docker build -t spring_app -f Dockerfile-spring .
+$ docker run -d --name spring_app -p 8080:8080 \
+  --link spring_db:spring_db \
+  -e SPRING_DB=spring_db spring_app 
+```
 
 ---
 <!-- .slide: class="center" -->
