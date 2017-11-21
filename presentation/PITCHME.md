@@ -139,7 +139,8 @@ Name          | HelloWorldController
 
 
 --- 
-### ocap/tutorial/dockerspring/web/HelloWorldController.java
+### Controller
+File: ocap/tutorial/dockerspring/web/HelloWorldController.java
 ```java
 package ocap.tutorial.dockerspring.web;
 
@@ -150,10 +151,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path="/helloworld", path="/simple")
+@RequestMapping(path="/helloworld")
 public class HelloWorldController {
 
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET, path="/simple")
 	public @ResponseBody String 
 		sayHello(@RequestParam(name="name", defaultValue="World") String name) {
 		
@@ -165,7 +166,8 @@ public class HelloWorldController {
 @[1-7](HelloWorldController.java - import required classes)
 @[8-20](HelloWorldController.java - Controller)
 
---- Test 
+--- 
+### Test HelloWorldController 
 
 ```sh
 $ mvn clean package
@@ -177,10 +179,8 @@ $ java -jar target/docker-spring-tutorial-0.0.1-SNAPSHOT.jar
 
 <!--
 
----
 ### MVC
 
----
 ### create helloworld.jsp
 SKIP
 
@@ -304,6 +304,7 @@ $ mvc spring-boot:run
 
 ---
 ### Insert Sample Users
+Run these sql statements through Mysql Workbench
 ```sql
 insert into springdb.user (username, email, password) values ('kim', 'kim@gmail.com', 'passwd1');
 insert into springdb.user (username, email, password) values ('lee', 'lee@gmail.com', 'passwd1');
@@ -316,6 +317,52 @@ insert into springdb.user (username, email, password) values ('ko', 'ko@gmail.co
 * [http://localhost:8080](http://localhost:8080)
 * [http://localhost:8080/users](http://localhost:8080/users)
 * [http://localhost:8080/users/1](http://localhost:8080/users/1)
+
+---
+### Create User through Postman
+
+* **HTTP Method**: POST
+* **URL**: localhost:8080/users
+* **Headers**
+  * Content-Type: application/json
+* **Body**: raw
+
+```json
+{
+	"username": "nicholas",
+	"email": "nicholas@oracle.com",
+	"password": "passwd1"
+}
+```
+
+---image=https://user-images.githubusercontent.com/5771924/33069307-78e97e06-cef7-11e7-9395-0df561813c60.png&size=auto 90%
+
+
+---
+### Create User through Postman
+
+* **HTTP Method**: PUT
+* **URL**: localhost:8080/users/4
+* **Headers**
+  * Content-Type: application/json
+* **Body**: raw
+
+```json
+{
+	"username": "nicholas",
+	"email": "nicholas@gmail.com",
+	"password": "mypasswd1"
+}
+```
+@[3-4](email and password have been changed)
+
+---image=https://user-images.githubusercontent.com/5771924/33070398-37af6244-cefb-11e7-8cc1-10911ecee524.png&size=auto 90%
+
+### Delete User through Postman
+* **HTTP Method**: DELETE
+* **URL**: localhost:8080/users/4
+
+---image=https://user-images.githubusercontent.com/5771924/33070524-9d2c3e44-cefb-11e7-80ad-367d96b80a01.png&size=auto 90%
 
 ---
 <!-- .slide: class="center" -->
