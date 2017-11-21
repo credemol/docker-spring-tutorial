@@ -444,6 +444,7 @@ spring.jpa.hibernate.ddl-auto = update
 ---
 #### Dockerfile
 File: docker/Dockerfile-spring
+
 ```sh
 $ mvn clean package
 $ cd docker
@@ -451,6 +452,8 @@ $ rm docker-spring-tutorial-0.0.1-SNAPSHOT.jar
 $ cp -f ../target/docker-spring-tutorial-0.0.1-SNAPSHOT.jar  ./
 $ vi Dockerfile-spring
 ```
+
+_Dockerfile-spring_
 
 ```dockerfile
 FROM openjdk:8-jdk-alpine
@@ -462,9 +465,11 @@ EXPOSE 8080
 
 ---
 #### Build & Run Spring Application
+
 ```sh
-$ 
+
 $ docker build -t spring_app -f Dockerfile-spring .
+$
 $ docker run -d --name spring_app -p 8080:8080 \
   --link spring_db:spring_db \
   -e SPRING_DB=spring_db spring_app 
