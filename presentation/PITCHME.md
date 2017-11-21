@@ -25,10 +25,10 @@ SpringBoot Application on Docker
 
 Run: File > New > Spring Starter Project
 
----
+---?image=path/to/image.file&size=auto 90%
 ![New Spring Starter Project](https://user-images.githubusercontent.com/5771924/33048475-68d85cfc-ce9e-11e7-9056-27de3acef363.png)
 
----
+---?image=path/to/image.file&size=auto 100%
 ![New Spring Starter Project Dependencies](https://user-images.githubusercontent.com/5771924/33048495-8ce01edc-ce9e-11e7-867f-d287025bc4e8.png)
 
 
