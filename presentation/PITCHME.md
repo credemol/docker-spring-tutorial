@@ -335,7 +335,7 @@ insert into springdb.user (username, email, password) values ('ko', 'ko@gmail.co
 }
 ```
 
----image=https://user-images.githubusercontent.com/5771924/33069307-78e97e06-cef7-11e7-9395-0df561813c60.png&size=auto 90%
+---?image=https://user-images.githubusercontent.com/5771924/33069307-78e97e06-cef7-11e7-9395-0df561813c60.png&size=auto 90%
 
 
 ---
@@ -356,13 +356,13 @@ insert into springdb.user (username, email, password) values ('ko', 'ko@gmail.co
 ```
 @[3-4](email and password have been changed)
 
----image=https://user-images.githubusercontent.com/5771924/33070398-37af6244-cefb-11e7-8cc1-10911ecee524.png&size=auto 90%
+---?image=https://user-images.githubusercontent.com/5771924/33070398-37af6244-cefb-11e7-8cc1-10911ecee524.png&size=auto 90%
 
 ### Delete User through Postman
 * **HTTP Method**: DELETE
 * **URL**: localhost:8080/users/4
 
----image=https://user-images.githubusercontent.com/5771924/33070524-9d2c3e44-cefb-11e7-80ad-367d96b80a01.png&size=auto 90%
+---?image=https://user-images.githubusercontent.com/5771924/33070524-9d2c3e44-cefb-11e7-80ad-367d96b80a01.png&size=auto 90%
 
 ---
 <!-- .slide: class="center" -->
