@@ -6,6 +6,7 @@ SpringBoot Application on Docker
 * Principal Sales Consultant
 
 ---
+<!-- .slide: class="center" -->
 * PT: [https://gitpitch.com/credemol/docker-spring-tutorial?p=presentation#/](https://gitpitch.com/credemol/docker-spring-tutorial?p=presentation#/)
 
 * Slack: cloudnativeapp.slack.com
@@ -18,9 +19,17 @@ SpringBoot Application on Docker
 * Spring Tool Suite: [https://spring.io/tools/sts](https://spring.io/tools/sts)
 * Docker or Docker Toolbox
 
+> Run Spring Tool Suite
 ---
 ## Create a Spring Boot Project
 
+Run: File > New > Spring Starter Project
+
+---
+![New Spring Starter Project](https://user-images.githubusercontent.com/5771924/33048475-68d85cfc-ce9e-11e7-9056-27de3acef363.png)
+
+---
+![New Spring Starter Project Dependencies](https://user-images.githubusercontent.com/5771924/33048495-8ce01edc-ce9e-11e7-867f-d287025bc4e8.png)
 
 
 ---
