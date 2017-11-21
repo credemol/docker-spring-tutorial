@@ -25,12 +25,28 @@ SpringBoot Application on Docker
 
 Run: File > New > Spring Starter Project
 
----?image=https://user-images.githubusercontent.com/5771924/33048475-68d85cfc-ce9e-11e7-9056-27de3acef363.png&size=50% 90%
+---?image=https://user-images.githubusercontent.com/5771924/33048475-68d85cfc-ce9e-11e7-9056-27de3acef363.png&size=auto 90%
 
 
 ---?image=https://user-images.githubusercontent.com/5771924/33048495-8ce01edc-ce9e-11e7-867f-d287025bc4e8.png&size=auto 90%
 
+---
+### Project Properties
 
+Property Name | value
+--------------|----------------
+Name          | docker-spring-tutorial
+Type          | Maven
+Group         | ocap.tutorial
+Artifact      | docker-spring-tutorial
+Package       | ocap.tutorial.dockerspring
+
+---
+### Project Dependencies
+
+* SQL > JPA
+* SQL > MySQL
+* Web > Web
 
 ---
 <!-- .slide: class="center" -->
