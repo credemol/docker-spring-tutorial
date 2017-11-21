@@ -377,7 +377,7 @@ HTTP Method | SQL Statement | Note
  PUT        | UPDATE        |
  DELETE     | DELETE        |
 
-
+---
 ### Sophisticated Query using findBy
 File: ocap/tutorial/dockerspring/repo/UserRepository.java
 ```java
@@ -415,6 +415,10 @@ public interface UserRepository extends CrudRepository<User, Long>{
 * [http://localhost:8080/users/search/findByEmail?email=kim@gmail.com](http://localhost:8080/users/search/findByEmail?email=kim@gmail.com)
 * [http://localhost:8080/users/search/findByEmailStartingWith?email=k](http://localhost:8080/users/search/findByEmailStartingWith?email=k)
 * [http://localhost:8080/users/search/findByEmailEndingWith?email=com](http://localhost:8080/users/search/findByEmailEndingWith?email=com)
+
+---
+### Test Query
+
 * [http://localhost:8080/users/search/findByEmailContaining?email=gmail](http://localhost:8080/users/search/findByEmailContaining?email=gmail)
 * [http://localhost:8080/users/search/findByEmailLike?email=%25gmail%25](http://localhost:8080/users/search/findByEmailLike?email=%25gmail%25)
 * [http://localhost:8080/users/search/findByUsernameAndEmail?username=kim&email=kim@gmail.com](http://localhost:8080/users/search/findByUsernameAndEmail?username=kim&email=kim@gmail.com)
