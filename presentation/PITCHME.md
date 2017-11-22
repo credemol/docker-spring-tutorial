@@ -16,7 +16,7 @@ SpringBoot Application on Docker
 ## Pre requisites
 
 * JDK 1.8: [http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* Maven 3.5: [https://maven.apache.org/download.cgi](https://maven.apache.org/download.cgi)
+* Maven 3: [https://maven.apache.org/download.cgi](https://maven.apache.org/download.cgi)
 * Spring Tool Suite: [https://spring.io/tools/sts](https://spring.io/tools/sts)
 * Postman: [https://www.getpostman.com/apps](https://www.getpostman.com/apps)
 
@@ -49,6 +49,10 @@ $ echo $PATH
 ```
 
 ---
+<!-- .slide: class="center" -->
+* Ruby On Rails
+* Spring Boot
+---
 ## Create a Spring Boot Project
 
 1. Run Spring Tool Suite and see where the workspace is
@@ -76,6 +80,18 @@ Package       | ocap.tutorial.dockerspring
 * SQL > JPA
 * SQL > MySQL
 * Web > Web
+* Web > Rest Repositories
+
+---
+### Maven Compile
+
+Select the _'docker-spring-tutorial'_ project and right click and the click Properties Menu. 
+When you select Resource from left panel of the dialog, You can see the project location. 
+
+```sh
+$ cd docker-spring-tutorial
+$ mvn compile 
+```
 
 ---
 ### Create Dockerfile-mysql
@@ -87,7 +103,7 @@ $ vi Dockerfile-mysql
 ```
 ---
 ### Dockerfile-mysql
-
+File: Dockerfile-mysql
 ```dockerfile
 FROM mysql:5.7
 ENV MYSQL_ROOT_PASSWORD="springdb"
@@ -111,7 +127,8 @@ $ docker run -d --name spring_db -p 3306:3306 \
 ---?image=https://user-images.githubusercontent.com/5771924/33059835-554f6c8a-ced9-11e7-8056-7e37b0f1d258.png&size=auto 90%
 
 ---
-### src/main/resources/application.properties
+### Database settings
+File: src/main/resources/application.properties
 
 ```properties
 spring.datasource.url = jdbc:mysql://localhost:3306/springdb?useSSL=false
@@ -420,10 +437,10 @@ public interface UserRepository extends CrudRepository<User, Long>{
 	List<User> findByUsernameAndEmail(@Param("username")String username, @Param("email")String email);
 	List<User> findByUsernameOrEmail(@Param("username")String username, @Param("email")String email);
 }
-
+```
 @[3-9](import required classes)
 @[13-22](select query) 
-````
+
 ---
 ### Test Query
 
@@ -445,7 +462,7 @@ public interface UserRepository extends CrudRepository<User, Long>{
 
 File: src/main/resources/application.properties
 ```properties
-spring.datasource.url = jdbc:mysql://${SPRING_DB:localhost}:3306/springdb?useSSL=false
+spring.datasource.url = jdbc:mysql://${SPRING_DB:localhost:3306}/springdb?useSSL=false
 
 # Username and password
 spring.datasource.username = springdb
