@@ -505,7 +505,7 @@ $ docker build -t spring_app -f Dockerfile-spring .
 $
 $ docker run -d --name spring_app -p 8080:8080 \
   --link spring_db:spring_db \
-  -e SPRING_DB=spring_db spring_app 
+  -e SPRING_DB=spring_db:3306 spring_app 
 ```
 
 ---
