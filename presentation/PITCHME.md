@@ -26,10 +26,11 @@ SpringBoot Application on Docker
 ```sh
 $ cd ~/Downloads
 $ curl -O http://download.springsource.com/release/STS/3.9.1.RELEASE/dist/e4.7/spring-tool-suite-3.9.1.RELEASE-e4.7.1a-linux-gtk-x86_64.tar.gz
+$ tar -xvf spring-tool-suite-3.9.1.RELEASE-e4.7.1a-linux-gtk-x86_64.tar.gz
 $ cd sts-bundle/sts-3.9.1.RELEASE
 $ ./STS
 
-$ tar -xvf spring-tool-suite-3.9.1.RELEASE-e4.7.1a-linux-gtk-x86_64.tar.gz
+
 $ sudo apt-get install maven
 
 ```
