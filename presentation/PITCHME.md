@@ -19,6 +19,22 @@ SpringBoot Application on Docker
 * Maven 3.5: [https://maven.apache.org/download.cgi](https://maven.apache.org/download.cgi)
 * Spring Tool Suite: [https://spring.io/tools/sts](https://spring.io/tools/sts)
 * Postman: [https://www.getpostman.com/apps](https://www.getpostman.com/apps)
+
+---
+### Configuration on VirtualBox
+
+```sh
+$ cd ~/Downloads
+$ curl -O http://download.springsource.com/release/STS/3.9.1.RELEASE/dist/e4.7/spring-tool-suite-3.9.1.RELEASE-e4.7.1a-linux-gtk-x86_64.tar.gz
+$ cd sts-bundle/sts-3.9.1.RELEASE
+$ ./STS
+
+$ tar -xvf spring-tool-suite-3.9.1.RELEASE-e4.7.1a-linux-gtk-x86_64.tar.gz
+$ sudo apt-get install maven
+
+```
+
+
 ---
 ### set environment variables: 
 
@@ -474,6 +490,51 @@ $ docker run -d --name spring_app -p 8080:8080 \
   --link spring_db:spring_db \
   -e SPRING_DB=spring_db spring_app 
 ```
+
+---
+## Docker Repository
+
+* [https://hub.docker.com/](https://hub.docker.com/)
+
+* Sign up
+
+---
+### Share Your Own Docker Image 	
+
+We are going to share docker images below:
+
+* spring_db
+* spring_app
+
+---
+### Tag your docker image
+
+#### ${DOCKER_HUB_USERNAME}/${DOCKER_IMAGE_NAME}:${VERSION} 
+
+```sh
+$ docker tag spring_db credemol/spring_db:1.0
+$ docker tag spring_app credemol/spring_app:1.0
+
+$ docker login
+username: credemol
+password: 
+
+$ docker push credemol/spring_db:1.0
+$ docker push credemol/spring_app:1.0
+``` 
+
+--- 
+### Pull Docker Image
+
+```sh
+$ docker pull credemol/spring_db:1.0
+$ docker pull credemol/spring_app:1.0
+
+$ mkdir -p ~/tmp/credemol_data
+$ docker image ls
+$ docker run -d --name credemol-spring-db -p 13306:3306 \
+  -v ~/tmp/credemol_data:/var/lib/mysql credemol/spring_db:1.0
+``` 
 
 ---
 <!-- .slide: class="center" -->
